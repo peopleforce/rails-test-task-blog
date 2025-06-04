@@ -1,0 +1,31 @@
+volumes:
+  history:
+  postgres-db:
+
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    stdin_open: true
+    tty: true
+    env_file:
+      - .env
+    volumes:
+      - ./:/app
+    ports:
+      - "3000:3000"
+      - "80:80"
+    depends_on:
+      - db
+  db:
+    hostname: database
+    image: postgres:15.11
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
