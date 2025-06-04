@@ -23,3 +23,9 @@ jan = User.create!(
   last_name: "Kowalski",
   email: "jan@kowalski.com"
 )
+
+post = Post.create!(
+  title: "My first post",
+  content: "This is the content of my first post.",
+  created_by: jan
+)
